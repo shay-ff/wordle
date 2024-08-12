@@ -37,7 +37,7 @@ const checkWordInList = async (guess) => {
 
 async function makeGuess() {
     const guessInput = document.getElementById("guessInput");
-    const guess = guessInput.value.toLowerCase();
+    const guess = guessInput.value.toUpperCase();
 
     if (guess.length !== 5) {
         document.getElementById("message").textContent = "Please enter a 5-letter word.";
