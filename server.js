@@ -3,9 +3,12 @@ const path = require('path');
 const wordList = require('./5-letter-words.json');
 const bodyParser = require("body-parser"); 
 const router= express.Router();
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 // Serve static files from the root directory
 app.use(express.static(path.join(__dirname)));

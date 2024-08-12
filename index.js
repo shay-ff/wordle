@@ -3,10 +3,10 @@
 // const word = wordList[Math.floor(Math.random() * wordList.length)];
 let word;
 let attempts = 0;
-
+const baseUrl = "http://localhost:3000"; 
 async function loadWords(){
     try {
-        const response = await fetch("http://localhost:3000/random-word");
+        const response = await fetch(`${baseUrl}/random-word`);
         res = await response.json();
         word = res?.word;
         // word = wordList[Math.floor(Math.random() * wordList.length)];
@@ -27,7 +27,7 @@ function createGrid() {
 
 const checkWordInList = async (guess) => {
     try {
-        const response = await fetch(`http://localhost:3000/check-word?input=${guess}`);
+        const response = await fetch(`${baseUrl}/check-word?input=${guess}`);
         res = await response.json();
         return res.isValid;
     } catch (error) {
@@ -74,5 +74,10 @@ async function makeGuess() {
         document.getElementById("guessInput").disabled = true;
     }
 }
+document.getElementById("guessInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        makeGuess();
+    }
+});
 createGrid();
 loadWords();
