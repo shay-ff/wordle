@@ -1,9 +1,8 @@
-
-//const wordList = ["apple", "brave", "crate", "dwell", "eagle", "flame", "grape", "hound", "inlet", "jumbo"];
-// const word = wordList[Math.floor(Math.random() * wordList.length)];
 let word;
 let attempts = 0;
-const baseUrl = "http://localhost:3000"; 
+const baseUrl = "https://wordle-ten-taupe.vercel.app"; 
+
+
 async function loadWords(){
     try {
         const response = await fetch(`${baseUrl}/random-word`);
