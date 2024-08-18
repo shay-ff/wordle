@@ -1,14 +1,12 @@
 let word;
 let attempts = 0;
-const baseUrl = "https://wordle-ten-taupe.vercel.app"; 
+const baseUrl = "https://wordle-ten-taupe.vercel.app";
 
-
-async function loadWords(){
+async function loadWords() {
     try {
         const response = await fetch(`${baseUrl}/random-word`);
-        res = await response.json();
+        const res = await response.json();
         word = res?.word;
-        // word = wordList[Math.floor(Math.random() * wordList.length)];
     } catch (error) {
         console.error("Error fetching words:", error);
     }
@@ -27,10 +25,10 @@ function createGrid() {
 const checkWordInList = async (guess) => {
     try {
         const response = await fetch(`${baseUrl}/check-word?input=${guess}`);
-        res = await response.json();
+        const res = await response.json();
         return res.isValid;
     } catch (error) {
-        console.log("Check word err: ",error);
+        console.log("Check word error: ", error);
     }
 }
 
@@ -43,7 +41,7 @@ async function makeGuess() {
         return;
     }
 
-    if(!(await checkWordInList(guess))){
+    if (!(await checkWordInList(guess))) {
         document.getElementById("message").textContent = "Word not in the list. Please try again.";
         return;
     }
@@ -68,15 +66,17 @@ async function makeGuess() {
     if (guess === word) {
         document.getElementById("message").textContent = `Congratulations! You guessed the word: ${word}`;
         document.getElementById("guessInput").disabled = true;
-    } else if (attempts === 6) {
+    } else if (attempts === 5) {
         document.getElementById("message").textContent = `Sorry, you've run out of attempts. The word was: ${word}`;
         document.getElementById("guessInput").disabled = true;
     }
 }
+
 document.getElementById("guessInput").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         makeGuess();
     }
 });
+
 createGrid();
 loadWords();
